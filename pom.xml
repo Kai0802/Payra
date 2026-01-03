@@ -23,5 +23,6 @@
 
   <modules>
       <module>services/transaction-service</module>
+    <module>services/user-service</module>
   </modules>
 </project>
