@@ -6,6 +6,7 @@ import com.pn.transactionservice.model.enummodel.PaymentStatus;
 import com.pn.transactionservice.repository.ItemAllocationRepository;
 import com.pn.transactionservice.repository.SplitParticipantRepository;
 import com.pn.transactionservice.repository.SplitRepository;
+import com.pn.transactionservice.service.SplitCalculationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -24,6 +25,7 @@ public class DataLoader implements CommandLineRunner {
     private final SplitRepository splitRepository;
     private final ItemAllocationRepository itemAllocationRepository;
     private final SplitParticipantRepository splitParticipantRepository;
+    private final SplitCalculationService splitCalculationService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -55,6 +57,10 @@ public class DataLoader implements CommandLineRunner {
         log.info("======================");
         log.info("Data loaded successfully");
         log.info("======================");
+
+        // testing split calculation service
+        log.info("testing split calculation service. the result should $1 {}", splitCalculationService.calculateTipShare(alice, split));
+
 
     }
 }

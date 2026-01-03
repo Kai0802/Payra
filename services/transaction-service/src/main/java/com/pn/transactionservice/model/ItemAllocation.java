@@ -9,8 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.FetchType;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -24,6 +26,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Table
+@Builder
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class ItemAllocation {
@@ -33,6 +36,7 @@ public class ItemAllocation {
 
     // relationship
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "split_participant_id", nullable = false)
     private SplitParticipant splitParticipant; // who this item allocation belongs to (Do we need this?)
 
     // reference to receipt service
@@ -52,8 +56,17 @@ public class ItemAllocation {
     @Column(nullable = false, precision = 5, scale = 4)
     private BigDecimal splitPortion; // 0.5, 0.3, 1 (split in half, in three, pay for themselves)
 
+    // actual amount this person owes for this item (item price * split portion + tax for item)
+    // if not taxable then just item price * split portion
     @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal allocatedAmount; // actual amount this person owes for this item (item price * split portion)
+    private BigDecimal allocatedAmount;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private Boolean isTaxable = true;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal allocatedTax;
 
     private String notes;
 
@@ -61,4 +74,6 @@ public class ItemAllocation {
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+
 }

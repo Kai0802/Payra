@@ -49,6 +49,9 @@ public class Split {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal subtotal;
 
+    @Column(precision = 5, scale = 2)
+    private BigDecimal taxRate;
+
     @Column(precision = 10, scale = 2)
     private BigDecimal taxAmount;
 
