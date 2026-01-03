@@ -1,11 +1,15 @@
 package com.pn.transactionservice.controller;
 
+import com.pn.transactionservice.dto.requestdto.SplitRequestDTO;
+import com.pn.transactionservice.dto.responsedto.SplitResponseDTO;
 import com.pn.transactionservice.service.SplitCalculationService;
 import com.pn.transactionservice.service.SplitService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/splits")
@@ -18,8 +22,9 @@ public class SplitController {
         this.splitCalculationService = splitCalculationService;
     }
 
-    @GetMapping
-    public String Hello() {
-        return "Hello World!";
+    @PostMapping
+    public ResponseEntity<SplitResponseDTO> createSplit(@RequestBody SplitRequestDTO splitRequestDTO) {
+        SplitResponseDTO response = splitService.createSplit(splitRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

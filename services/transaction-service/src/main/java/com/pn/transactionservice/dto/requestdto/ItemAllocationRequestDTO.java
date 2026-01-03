@@ -1,4 +1,4 @@
-package com.pn.transactionservice.dto;
+package com.pn.transactionservice.dto.requestdto;
 
 
 import lombok.AllArgsConstructor;

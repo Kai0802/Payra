@@ -1,11 +1,10 @@
-package com.pn.transactionservice.dto;
+package com.pn.transactionservice.dto.requestdto;
 
 import com.pn.transactionservice.model.enummodel.SplitMethod;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
 @Builder
 public class SplitRequestDTO {
     private String receiptId;
-    private String payerId; // also the person who scanned the receipt
+    private String payerId; // refer to the person who scanned the receipt and entirely paid for it
     private LocalDateTime receiptDate;
     private SplitMethod splitMethod;
     private String description;
