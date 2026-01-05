@@ -14,7 +14,6 @@ import java.util.List;
 @Builder
 public class ParticipantRequestDTO {
     private String userId;
-    private String firstName;
     private Boolean isPayer;
     private List<ItemAllocationRequestDTO> itemAllocations;
 

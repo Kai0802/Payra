@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @Builder
 public class ItemAllocationRequestDTO {
     private String ReceiptItemId;
+    private String receiptItemName;
     private BigDecimal splitPortion; // whether to pay for half or third and fourth
     private String notes;
 }
